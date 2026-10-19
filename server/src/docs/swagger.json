@@ -1,0 +1,135 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Threadline E-Commerce REST API",
+    "version": "1.0.0",
+    "description": "REST API documentation for Threadline Indian fashion e-commerce store"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api",
+      "description": "Local Development Server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "summary": "Register customer",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "email": { "type": "string" },
+                  "password": { "type": "string" },
+                  "phone": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "User created" } }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Login user or admin",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Token and profile returned" } }
+      }
+    },
+    "/products": {
+      "get": {
+        "summary": "List & search products",
+        "tags": ["Products"],
+        "parameters": [
+          { "name": "q", "in": "query", "schema": { "type": "string" } },
+          { "name": "category", "in": "query", "schema": { "type": "string" } },
+          { "name": "minPrice", "in": "query", "schema": { "type": "number" } },
+          { "name": "maxPrice", "in": "query", "schema": { "type": "number" } },
+          { "name": "sort", "in": "query", "schema": { "type": "string", "enum": ["popular", "price_asc", "price_desc", "rating", "newest"] } },
+          { "name": "page", "in": "query", "schema": { "type": "integer" } },
+          { "name": "limit", "in": "query", "schema": { "type": "integer" } }
+        ],
+        "responses": { "200": { "description": "Paginated product list" } }
+      }
+    },
+    "/products/{slug}": {
+      "get": {
+        "summary": "Get product by slug",
+        "tags": ["Products"],
+        "parameters": [
+          { "name": "slug", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Product details with images and sizes" } }
+      }
+    },
+    "/cart": {
+      "get": {
+        "summary": "Get active cart",
+        "tags": ["Cart"],
+        "security": [{ "BearerAuth": [] }],
+        "responses": { "200": { "description": "Cart items and order summary" } }
+      },
+      "post": {
+        "summary": "Add item to cart",
+        "tags": ["Cart"],
+        "security": [{ "BearerAuth": [] }],
+        "responses": { "201": { "description": "Item added" } }
+      }
+    },
+    "/checkout/create": {
+      "post": {
+        "summary": "Initialize checkout & Razorpay order",
+        "tags": ["Checkout"],
+        "security": [{ "BearerAuth": [] }],
+        "responses": { "200": { "description": "Razorpay order or COD intent created" } }
+      }
+    },
+    "/checkout/verify": {
+      "post": {
+        "summary": "Verify payment and execute transactional checkout",
+        "tags": ["Checkout"],
+        "security": [{ "BearerAuth": [] }],
+        "responses": { "201": { "description": "Order placed successfully" } }
+      }
+    },
+    "/delivery/{pincode}": {
+      "get": {
+        "summary": "Check 6-digit Indian PIN delivery estimate",
+        "tags": ["Delivery"],
+        "parameters": [
+          { "name": "pincode", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Delivery estimate details" } }
+      }
+    }
+  }
+}

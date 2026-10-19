@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-black: #111111;
+    --color-orange: #F97316;
+    --color-bg: #F5F4F2;
+    --color-surface: #FFFFFF;
+    --color-border: #E2E2E0;
+    --color-muted: #6B6B6B;
+    --color-placeholder: #EBEBE9;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-black);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F4F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #D5D5D3;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B0B0AE;
+}
+
+/* Base image styling with neutral grey fallback background */
+img {
+  background-color: var(--color-placeholder);
+}
+
+/* Strict button and input rules */
+input, select, textarea, button {
+  border-radius: 4px;
+}

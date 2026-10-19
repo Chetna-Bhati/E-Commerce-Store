@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <defs>
+    <linearGradient id="g_minimal-bauhaus-analog-watch_3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E6E4DF"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.6"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#000000" stroke-opacity="0.025" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="1000" fill="url(#g_minimal-bauhaus-analog-watch_3)"/>
+  <rect width="800" height="1000" fill="url(#grid)"/>
+
+  <!-- Editorial Framing -->
+  <rect x="24" y="24" width="752" height="952" fill="none" stroke="#111111" stroke-opacity="0.08" stroke-width="1"/>
+  
+  <!-- Header Tag -->
+  <text x="48" y="64" font-family="'Archivo', sans-serif" font-weight="800" font-size="14" fill="#111111" letter-spacing="2">THREADLINE.</text>
+  <text x="752" y="64" text-anchor="end" font-family="'DM Sans', sans-serif" font-weight="600" font-size="12" fill="#6B6B6B" letter-spacing="1.5">LOOK 03</text>
+
+  <!-- Silhouette Graphic Area -->
+  <g transform="translate(100, 160)">
+    <!-- Soft Shadow -->
+    <ellipse cx="300" cy="560" rx="220" ry="24" fill="#111111" fill-opacity="0.06"/>
+    
+    <!-- Central Shape Card -->
+    <rect x="60" y="40" width="480" height="480" rx="8" fill="#FFFFFF" stroke="#E2E2E0" stroke-width="1"/>
+    
+    <!-- Category Icon Visual -->
+    
+        <!-- Watch silhouette -->
+        <rect x="275" y="140" width="50" height="300" rx="6" fill="#3D3328" fill-opacity="0.4"/>
+        <circle cx="300" cy="290" r="75" fill="#FFFFFF" stroke="#3D3328" stroke-width="8"/>
+        <circle cx="300" cy="290" r="65" fill="#FAFAFA"/>
+        <line x1="300" y1="290" x2="300" y2="245" stroke="#3D3328" stroke-width="4" stroke-linecap="round"/>
+        <line x1="300" y1="290" x2="335" y2="290" stroke="#F97316" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="300" cy="290" r="5" fill="#3D3328"/>
+      
+    
+    <text x="300" y="460" text-anchor="middle" font-family="'DM Sans', sans-serif" font-weight="600" font-size="14" fill="#111111" letter-spacing="1">
+      WATCH • Back / Silhouette
+    </text>
+    
+    <!-- Color Bar Accent -->
+    <rect x="220" y="480" width="160" height="4" rx="2" fill="#F97316"/>
+  </g>
+
+  <!-- Product Name & Editorial Specs -->
+  <g transform="translate(48, 860)">
+    <text x="0" y="0" font-family="'DM Sans', sans-serif" font-weight="600" font-size="13" fill="#F97316" letter-spacing="2">AUTUMN / ESSENTIALS</text>
+    <text x="0" y="30" font-family="'Archivo', sans-serif" font-weight="800" font-size="24" fill="#111111">Bauhaus Analog Watch</text>
+    <text x="0" y="55" font-family="'DM Sans', sans-serif" font-size="14" fill="#6B6B6B">Designed for the Indian Climate • 100% Guaranteed Fit</text>
+  </g>
+
+  <!-- Bottom Corner Mark -->
+  <text x="752" y="935" text-anchor="end" font-family="'DM Sans', sans-serif" font-size="12" font-weight="700" fill="#111111">4:5 PORTRAIT</text>
+</svg>

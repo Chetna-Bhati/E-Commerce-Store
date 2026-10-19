@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: threadline-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: threadline_db
+      MYSQL_USER: threadline_user
+      MYSQL_PASSWORD: threadline_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/2-seed.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  server:
+    build: ./server
+    container_name: threadline-server
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      NODE_ENV: development
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: threadline_user
+      DB_PASSWORD: threadline_pass
+      DB_NAME: threadline_db
+      JWT_SECRET: dev_jwt_secret_key_change_in_production_12345
+      JWT_EXPIRES_IN: 7d
+      RAZORPAY_KEY_ID: rzp_test_placeholder_key
+      RAZORPAY_KEY_SECRET: rzp_test_placeholder_secret
+      CLIENT_URL: http://localhost:5173
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  client:
+    build: ./client
+    container_name: threadline-client
+    restart: always
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_BASE_URL: http://localhost:5000/api
+      VITE_RAZORPAY_KEY_ID: rzp_test_placeholder_key
+    depends_on:
+      - server
+
+volumes:
+  mysql_data:
